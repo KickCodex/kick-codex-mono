@@ -1,16 +1,17 @@
 /*
- * base eslint config for internal (bundled by their consumer) libraries that utilize React.
+ * base eslint config for packages monorepo root
  */
 const base = require("./base");
+
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
     ...base,
     extends: [
         ...base.extends,
-        'universe/web',
+        "universe/node",
     ],
     env: {
-        node: false,
-        browser: true,
+        node: true,
+        browser: false,
     }
 };
