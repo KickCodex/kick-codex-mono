@@ -1,0 +1,17 @@
+{
+  "name": "docker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "docker:cmd": "docker-compose -p kick-codex --file docker-compose.yml",
+    "docker:start": "pnpm docker:cmd up --remove-orphans",
+    "docker:stop": "pnpm docker:cmd stop",
+    "docker:restart": "pnpm docker:cmd restart",
+    "docker:build": "pnpm docker:cmd build"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*"
+  }
+}
