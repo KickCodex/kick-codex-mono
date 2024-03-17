@@ -1,0 +1,26 @@
+version: "3.8"
+name: kick-codex
+services:
+  mysql:
+    container_name: kick-codex-db
+    image: mariadb:10.11.6
+    restart: "on-failure"
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      - MARIADB_ROOT_PASSWORD=kick-codex
+      - MARIADB_USER=kick-codex
+      - MARIADB_PASSWORD=kick-codex
+      - MARIADB_DATABASE=kick-codex
+    volumes:
+      - ./data/mysql:/var/lib/mysql:delegated
+    ports:
+      - "7306:3306"
+  redis:
+    container_name: kick-codex-redis
+    image: redis:7.0-alpine3.16
+    restart: "on-failure"
+    command: redis-server --appendonly yes --requirepass kick-codex
+    volumes:
+      - ./data/redis:/data:delegated
+    ports:
+      - "7379:6379"
