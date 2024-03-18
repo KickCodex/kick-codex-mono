@@ -1,7 +1,11 @@
+'use client';
 import { Button } from '@repo/ui/button';
 import { Card } from '@repo/ui/card';
 import { Code } from '@repo/ui/code';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+
+import { Debug } from '@webApp/components/Debug';
 
 import styles from './page.module.css';
 
@@ -44,9 +48,11 @@ const LINKS = [
 ];
 
 export default function Page(): JSX.Element {
+    const session = useSession();
     return (
         <main className={styles.main}>
             <div className={styles.description}>
+                <Debug data={session} />
                 <p>
                     examples/basic&nbsp;
                     <Code className={styles.code}>web</Code>

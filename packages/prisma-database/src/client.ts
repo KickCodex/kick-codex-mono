@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 type AfterLogInUser = {
     name: string;
     email: string;
-    image?: string;
+    image?: string | null | undefined;
 };
 
 type AfterLogInAccount = {
@@ -15,7 +15,8 @@ export const prisma = new PrismaClient().$extends({
     name: 'afterLogIn',
     model: {
         user: {
-            async afterLogIn(user: AfterLogInUser, account: AfterLogInAccount) {
+            async afterLogIn(user: AfterLogInUser, account: AfterLogInAccount | null) {
+                if (!account) return false;
                 const existingUser = await prisma.user.findFirst({
                     where: {
                         providerName: account.provider,
