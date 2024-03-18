@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Brand {
+  id          Int       @id @default(autoincrement()) @db.UnsignedInt
+  name        String    @unique(map: "brand.name") @default("") @db.VarChar(100)
+  description String?   @db.Text
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+  models      Model[]
+
+  @@map("brands")
+}
+
+model Model {
+  id          Int       @id @default(autoincrement()) @db.UnsignedInt
+  name        String    @default("") @db.VarChar(100)
+  brandId     Int       @map("brand_id") @db.UnsignedInt
+  description String?   @db.Text
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+  brand       Brand     @relation(fields: [brandId], references: [id])
+  sneakers    Sneaker[]
+
+  @@index([brandId], map: "model.brand_id")
+  @@map("models")
+}
+
+model Sneaker {
+  id          Int            @id @default(autoincrement()) @db.UnsignedInt
+  name        String         @unique(map: "sneaker.name") @default("") @db.VarChar(100)
+  modelId     Int            @map("model_id") @db.UnsignedInt
+  releaseDate DateTime?      @map("release_date")
+  colorway    String?        @db.VarChar(200)
+  retailPrice Float?         @map("retail_price")
+  description String?        @db.Text
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @default(now()) @updatedAt @map("updated_at")
+  deletedAt   DateTime?      @map("deleted_at")
+  model       Model          @relation(fields: [modelId], references: [id])
+  colors      SneakerColor[]
+
+  @@index([modelId], map: "sneaker.model_id")
+  @@map("sneakers")
+}
+
+model Image {
+  id           Int       @id @default(autoincrement()) @db.UnsignedInt
+  userId       Int       @map("user_id") @db.UnsignedInt
+  foreignModel String    @default("") @map("foreign_table") @db.VarChar(100)
+  foreignId    Int       @map("foreign_id") @db.UnsignedInt
+  url          String    @db.Text
+  caption      String?   @db.VarChar(200)
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @default(now()) @updatedAt @map("updated_at")
+  deletedAt    DateTime? @map("deleted_at")
+  user         User      @relation(fields: [userId], references: [id])
+
+  @@index([foreignId], map: "image.foreign_id")
+  @@index([foreignModel], map: "image.foreign_table")
+  @@index([userId], map: "image.user_id")
+  @@map("images")
+}
+
+model User {
+  id            Int            @id @default(autoincrement()) @db.UnsignedInt
+  email         String
+  name          String?
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @default(now()) @updatedAt @map("updated_at")
+  deletedAt     DateTime?      @map("deleted_at")
+  contributions Contribution[]
+  images        Image[]
+
+  @@index([email], map: "user.email")
+  @@map("users")
+}
+
+model Color {
+  id        Int            @id @default(autoincrement()) @db.UnsignedInt
+  name      String         @unique(map: "color.name")
+  hex_code  String         @db.Char(6)
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @default(now()) @updatedAt @map("updated_at")
+  deletedAt DateTime?      @map("deleted_at")
+  sneakers  SneakerColor[]
+
+  @@map("colors")
+}
+
+model Contribution {
+  id           Int       @id @default(autoincrement()) @db.UnsignedInt
+  userId       Int       @map("user_id") @db.UnsignedInt
+  foreignModel String    @default("") @map("foreign_table") @db.VarChar(100)
+  foreignId    Int       @map("foreign_id") @db.UnsignedInt
+  type         String    @default("") @db.VarChar(100)
+  description  String    @db.Text
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @default(now()) @updatedAt @map("updated_at")
+  deletedAt    DateTime? @map("deleted_at")
+  user         User      @relation(fields: [userId], references: [id])
+
+  @@index([foreignId], map: "contribution.foreign_id")
+  @@index([foreignModel], map: "contribution.foreign_table")
+  @@index([userId], map: "contribution.user_id")
+  @@map("contributions")
+}
+
+model SneakerColor {
+  id        Int     @id @default(autoincrement()) @db.UnsignedInt
+  sneakerId Int     @map("sneaker_id") @db.UnsignedInt
+  colorId   Int     @map("color_id") @db.UnsignedInt
+  color     Color   @relation(fields: [colorId], references: [id])
+  sneaker   Sneaker @relation(fields: [sneakerId], references: [id])
+
+  @@unique([sneakerId, colorId], map: "sneaker_color")
+  @@index([colorId], map: "color_id")
+  @@index([sneakerId], map: "sneaker_id")
+  @@map("sneakers_colors")
+}

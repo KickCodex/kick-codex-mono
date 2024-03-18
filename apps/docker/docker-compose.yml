@@ -2,7 +2,7 @@ version: "3.8"
 name: kick-codex
 services:
   mysql:
-    container_name: kick-codex-db
+    container_name: kick-codex-mysql
     image: mariadb:10.11.6
     restart: "on-failure"
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
@@ -15,6 +15,18 @@ services:
       - ./data/mysql:/var/lib/mysql:delegated
     ports:
       - "7306:3306"
+  postgres:
+    container_name: kick-codex-psql
+    image: postgres:14-alpine
+    restart: "on-failure"
+    environment:
+      - POSTGRES_PASSWORD=kick-codex
+      - POSTGRES_USER=kick-codex
+      - POSTGRES_DB=kick-codex
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data:delegated
+    ports:
+      - "7432:5432"
   redis:
     container_name: kick-codex-redis
     image: redis:7.0-alpine3.16
