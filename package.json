@@ -4,6 +4,7 @@
   "scripts": {
     "docker": "docker-compose -p kick-codex --file ./apps/docker/docker-compose.yml up --remove-orphans",
     "build": "turbo build",
+    "ci:check": "turbo lint && turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "lint:fix": "turbo lint:fix",
