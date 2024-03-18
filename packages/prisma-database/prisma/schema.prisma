@@ -74,13 +74,20 @@ model User {
   id            Int            @id @default(autoincrement()) @db.UnsignedInt
   email         String
   name          String?
+  isBanned      Boolean        @default(false) @map("is_banned")
   createdAt     DateTime       @default(now()) @map("created_at")
   updatedAt     DateTime       @default(now()) @updatedAt @map("updated_at")
   deletedAt     DateTime?      @map("deleted_at")
+  image         String?        @db.Text
+  providerName  String?        @map("provider_name") @db.VarChar(50)
+  providerUid   String?        @map("provider_uid") @db.VarChar(100)
   contributions Contribution[]
   images        Image[]
 
+  @@unique([providerName, providerUid], map: "userProvider")
   @@index([email], map: "user.email")
+  @@index([providerName], map: "user.providerName")
+  @@index([providerUid], map: "user.providerUid")
   @@map("users")
 }
 
