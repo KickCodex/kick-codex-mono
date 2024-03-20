@@ -2,6 +2,7 @@ import { prisma, PrismaDb, PrismaPaginatedResult } from '@repo/prisma-database/s
 import { ValidationError } from 'yup';
 
 import { BrandFormData, brandSchema } from '@webApp/modules/brands/brandSchema';
+import { getUserId, saveContribution } from '@webApp/modules/shared/sharedQuery';
 
 export const fetchBrand = (id: number): Promise<PrismaDb.Brand | null> =>
     prisma.brand.findFirst({
@@ -35,7 +36,16 @@ export const createBrand = async (
         const result = await prisma.brand.create({
             data,
         });
+        const userId = await getUserId();
 
+        await saveContribution({
+            name: result.name,
+            model: 'brand',
+            type: 'created',
+            userId,
+            id: result.id,
+            current: result,
+        });
         return { data: result };
     } catch (e) {
         const error = e as Error;
@@ -60,10 +70,23 @@ export const updateBrand = async (
             stripUnknown: true,
             strict: true,
         });
-
+        const previous = await prisma.brand.findFirst({
+            where: { id },
+        });
         const result = await prisma.brand.update({
             where: { id },
             data,
+        });
+
+        const userId = await getUserId();
+        await saveContribution({
+            name: result.name,
+            model: 'brand',
+            type: 'updated',
+            userId,
+            id: result.id,
+            previous,
+            current: result,
         });
 
         return { data: result };

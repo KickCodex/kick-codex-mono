@@ -75,6 +75,7 @@ export function TextInput<TFieldValues extends FieldValues = FieldValues>({
                             <Form.Control
                                 {...field}
                                 id={name}
+                                value={field.value || ''}
                                 as={as}
                                 type={type}
                                 placeholder={placeholder}
