@@ -11,7 +11,7 @@
     },
     "lint:fix": {
       "dependsOn": ["^lint:fix"],
-      "env": ["AUTH_API_URL","NEXTAUTH_SECRET","FACEBOOK_CLIENT_ID","FACEBOOK_CLIENT_SECRET"]
+      "env": ["AUTH_API_URL","NEXTAUTH_SECRET","FACEBOOK_CLIENT_ID","FACEBOOK_CLIENT_SECRET", "URL"]
     },
     "dev": {
       "cache": false,

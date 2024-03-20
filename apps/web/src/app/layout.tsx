@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './globals.css';
 import type { Metadata } from 'next';
+import { Toaster } from 'react-hot-toast';
 
 import { Providers } from '@webApp/app/providers';
 import Navigation from '@webApp/components/layout/Navigation';
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
             <body>
                 <Providers>
                     <Navigation />
+                    <Toaster position="top-center" />
                     {children}
                 </Providers>
             </body>

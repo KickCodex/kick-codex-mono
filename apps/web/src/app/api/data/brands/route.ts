@@ -1,5 +1,6 @@
-import { createBrand } from '@webApp/quries/brandsQuery';
 import { NextRequest } from 'next/server';
+
+import { createBrand } from '@webApp/queries/brandsQuery';
 
 export async function POST(request: NextRequest) {
     try {
