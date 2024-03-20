@@ -1,14 +1,28 @@
 import { FC, PropsWithChildren } from 'react';
+import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 
+import Pending from '@webApp/components/Pending';
+
 type Props = {
-    title: string;
+    title?: string;
 };
 const PageContainer: FC<PropsWithChildren<Props>> = ({ children, title }) => {
     return (
         <Container>
             <main>
-                <h1>{title}</h1>
+                <Pending
+                    data={title}
+                    placeHolderProps={{
+                        as: 'h1',
+                    }}
+                    innerPlaceHolderProps={{
+                        xs: 2,
+                    }}
+                >
+                    <h1>{title}</h1>
+                </Pending>
+
                 {children}
             </main>
         </Container>

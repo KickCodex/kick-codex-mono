@@ -19,6 +19,9 @@ const BrandCard: FC<BrandCardProps> = ({ brand }) => {
                     placeHolderProps={{
                         as: Card.Title,
                     }}
+                    innerPlaceHolderProps={{
+                        xs: 6,
+                    }}
                 >
                     <Card.Title>{brand?.name}</Card.Title>
                 </Pending>
@@ -27,6 +30,9 @@ const BrandCard: FC<BrandCardProps> = ({ brand }) => {
                     data={brand?.name}
                     placeHolderProps={{
                         as: Card.Subtitle,
+                    }}
+                    innerPlaceHolderProps={{
+                        xs: 6,
                     }}
                 >
                     <Card.Subtitle>{brand?.description || '-'}</Card.Subtitle>

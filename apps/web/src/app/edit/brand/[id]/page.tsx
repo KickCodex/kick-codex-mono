@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation';
 
-import { BrandForm } from '@webApp/components/forms/BrandForm';
 import PageContainer from '@webApp/components/layout/PageContainer';
-import { fetchBrand } from '@webApp/queries/brandsQuery';
+import { BrandForm } from '@webApp/modules/brands/BrandForm';
+import { fetchBrand } from '@webApp/modules/brands/brandsQuery';
 
 export default async function BrandEditPage({ params }: { params: { id: string } }) {
     const brand = await fetchBrand(Number(params.id));

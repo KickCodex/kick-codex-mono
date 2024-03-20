@@ -10,7 +10,7 @@ import { toast } from 'react-hot-toast';
 import { ValidationError } from 'yup';
 
 import ButtonLink from '@webApp/components/ButtonLink';
-import { BrandFormData, brandSchema } from '@webApp/schemas/brandSchema';
+import { BrandFormData, brandSchema } from '@webApp/modules/brands/brandSchema';
 
 type BrandFormProps = {
     forEdit?: boolean;

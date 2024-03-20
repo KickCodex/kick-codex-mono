@@ -1,7 +1,7 @@
 import { prisma, PrismaDb, PrismaPaginatedResult } from '@repo/prisma-database/src';
 import { ValidationError } from 'yup';
 
-import { BrandFormData, brandSchema } from '@webApp/schemas/brandSchema';
+import { BrandFormData, brandSchema } from '@webApp/modules/brands/brandSchema';
 
 export const fetchBrand = (id: number): Promise<PrismaDb.Brand | null> =>
     prisma.brand.findFirst({
