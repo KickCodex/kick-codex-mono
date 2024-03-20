@@ -1,0 +1,26 @@
+{
+  "name": "@repo/typeorm-database",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    "./shared": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/eslint": "^8.56.5",
+    "@types/node": "^20.11.24",
+    "eslint": "^8.57.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "mysql2": "^3.9.2",
+    "reflect-metadata": "^0.2.1",
+    "ts-node": "^10.9.2",
+    "typeorm": "^0.3.20"
+  }
+}
