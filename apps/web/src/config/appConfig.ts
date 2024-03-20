@@ -1,4 +1,5 @@
 export const appConfig = {
+    appUrl: String(process.env.URL || 'http://localhost:3000'),
     auth: {
         secret: String(process.env.NEXTAUTH_SECRET),
         facebook: {
