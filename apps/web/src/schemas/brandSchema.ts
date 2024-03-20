@@ -1,8 +1,8 @@
 import { InferType, object, string } from 'yup';
 
-export const brandCreateSchema = object({
+export const brandSchema = object({
     name: string().min(2).max(100).required(),
-    description: string().min(10).max(3000).optional(),
+    description: string().min(10).max(3000).optional().nullable(),
 });
 
-export type BrandCreateFormData = InferType<typeof brandCreateSchema>;
+export type BrandFormData = InferType<typeof brandSchema>;
