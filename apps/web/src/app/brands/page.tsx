@@ -1,5 +1,3 @@
-import PageContainer from '@webApp/components/layout/PageContainer';
+import ListPage from '@webApp/modules/brands/ListPage';
 
-export default function Page(): JSX.Element {
-    return <PageContainer title="Brands" />;
-}
+export default ListPage;
