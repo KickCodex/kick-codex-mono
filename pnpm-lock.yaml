@@ -185,9 +185,6 @@ importers:
       prisma:
         specifier: ^5.11.0
         version: 5.11.0
-      prisma-pagination-extension:
-        specifier: ^1.0.1
-        version: 1.0.1(prisma@5.11.0)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@20.11.24)(typescript@5.3.3)
@@ -4740,14 +4737,6 @@ packages:
 
   /pretty-format@3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
-    dev: false
-
-  /prisma-pagination-extension@1.0.1(prisma@5.11.0):
-    resolution: {integrity: sha512-1V8HQll+cBWasmKItrTgpFteWTKowflCeIOk2zbCDEUXi5LMGghMO/uQKWPQMlxH6uykWTxvO3cFC9VZ7fTwsA==}
-    dependencies:
-      '@prisma/client': 5.11.0(prisma@5.11.0)
-    transitivePeerDependencies:
-      - prisma
     dev: false
 
   /prisma@5.11.0:
