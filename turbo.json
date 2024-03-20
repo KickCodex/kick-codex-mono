@@ -29,7 +29,8 @@
         "FACEBOOK_CLIENT_SECRET",
         "URL",
         "GOOGLE_CLIENT_ID",
-        "GOOGLE_CLIENT_SECRET"
+        "GOOGLE_CLIENT_SECRET",
+        "DATABASE_URL"
       ]
     },
     "dev": {
