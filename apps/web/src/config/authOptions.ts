@@ -1,6 +1,7 @@
 import { prisma } from '@repo/prisma-database/src';
 import { AuthOptions } from 'next-auth';
 import FacebookProvider from 'next-auth/providers/facebook';
+import GoogleProvider from 'next-auth/providers/google';
 
 import { appConfig } from '@webApp/config/appConfig';
 
@@ -24,6 +25,10 @@ export const authOptions: AuthOptions = {
         FacebookProvider({
             clientId: appConfig.auth.facebook.clientId,
             clientSecret: appConfig.auth.facebook.clientSecret,
+        }),
+        GoogleProvider({
+            clientId: appConfig.auth.google.clientId,
+            clientSecret: appConfig.auth.google.clientSecret,
         }),
     ],
 };
