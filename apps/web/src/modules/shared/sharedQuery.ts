@@ -9,9 +9,31 @@ type SaveContributionParams = {
     type: 'updated' | 'created';
     name: string;
     userId: number;
+    previous?: object | null;
+    current?: object | null;
 };
 
-export const saveContribution = async ({ model, id, type, name, userId }: SaveContributionParams) => {
+const calculateDiff = (original: Record<string, any>, current: Record<string, any>): Record<string, any> => {
+    const diff: Record<string, any> = {};
+    for (const key in original) {
+        if (key !== 'createdAt' && key !== 'updatedAt' && original[key] !== current[key]) {
+            diff[key] = { original: original[key], current: current[key] };
+        }
+    }
+    return diff;
+};
+export const saveContribution = async ({
+    model,
+    id,
+    type,
+    name,
+    userId,
+    previous = {},
+    current = {},
+}: SaveContributionParams) => {
+    const originalData = previous || {};
+    const currentData = current || {};
+    const diff = calculateDiff(originalData, currentData);
     await prisma.contribution.create({
         data: {
             userId,
@@ -19,6 +41,9 @@ export const saveContribution = async ({ model, id, type, name, userId }: SaveCo
             foreignModel: model,
             foreignId: id,
             description: `${type} ${model} ${name}`,
+            originalData,
+            currentData,
+            diff,
         },
     });
 };
