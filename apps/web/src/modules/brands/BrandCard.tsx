@@ -1,5 +1,5 @@
 'use client';
-import { PrismaDb } from '@repo/prisma-database/src';
+import { PrismaDb } from '@repo/prisma-database/shared';
 import Link from 'next/link';
 import { FC } from 'react';
 import Card from 'react-bootstrap/Card';

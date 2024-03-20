@@ -1,4 +1,4 @@
-import { prisma, PrismaDb, PrismaPaginatedResult } from '@repo/prisma-database/src';
+import { prisma, PrismaDb, PrismaPaginatedResult } from '@repo/prisma-database/shared';
 import { ValidationError } from 'yup';
 
 import { BrandFormData, brandSchema } from '@webApp/modules/brands/brandSchema';

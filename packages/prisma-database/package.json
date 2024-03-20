@@ -2,10 +2,9 @@
   "name": "@repo/prisma-database",
   "version": "0.0.0",
   "private": true,
-  "files": [
-    "index.js",
-    "index.d.ts"
-  ],
+  "exports": {
+    "./shared": "./src/index.ts"
+  },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix"

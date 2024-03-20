@@ -1,5 +1,4 @@
 import { FC, PropsWithChildren } from 'react';
-import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 
 import Pending from '@webApp/components/Pending';

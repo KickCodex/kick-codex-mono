@@ -1,6 +1,6 @@
 'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PrismaDb } from '@repo/prisma-database/src';
+import { PrismaDb } from '@repo/prisma-database/shared';
 import { TextAreaInput, TextInput } from '@repo/ui/form';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
@@ -55,10 +55,10 @@ export const BrandForm: FC<BrandFormProps> = ({ forEdit = false, defaults }) => 
                 if (path) {
                     setError(path as FieldPath<BrandFormData>, { message });
                 }
-                toast.error(validationError.message);
             });
+            toast.error(validationError.message);
         } else if (error) {
-            toast.error(error.message || error.name || (error as any).error);
+            toast.error(error?.message || error?.name || (error as any).error || 'Unknown Error');
         } else if (data) {
             toast.success(successMessage);
             router.push(`/brands/${data.id}`);

@@ -1,4 +1,4 @@
-import { PrismaDb } from '@repo/prisma-database/src';
+import { PrismaDb } from '@repo/prisma-database/shared';
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 

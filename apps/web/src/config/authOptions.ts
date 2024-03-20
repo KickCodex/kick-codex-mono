@@ -1,4 +1,4 @@
-import { prisma } from '@repo/prisma-database/src';
+import { prisma } from '@repo/prisma-database/shared';
 import { AuthOptions } from 'next-auth';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GoogleProvider from 'next-auth/providers/google';
