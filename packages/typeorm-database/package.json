@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./core": "./src/index.ts"
+    "./entities": "./src/entities/index.ts",
+    "./conn": "./src/data-source.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",

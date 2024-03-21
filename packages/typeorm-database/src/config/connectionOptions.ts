@@ -2,13 +2,7 @@ import * as path from 'path';
 
 import { dbConfig } from './dbConfig';
 import { CustomNamingStrategy } from '../core/CustomNamingStrategy';
-import { BrandEntity } from '../entities/BrandEntity';
-import { ColorEntity } from '../entities/ColorEntity';
-import { ContributionEntity } from '../entities/ContributionEntity';
-import { ImageEntity } from '../entities/ImageEntity';
-import { ModelEntity } from '../entities/ModelEntity';
-import { SneakerEntity } from '../entities/SneakerEntity';
-import { UserEntity } from '../entities/UserEntity';
+import * as AllEntities from '../entities';
 import { databaseUriToConnection } from '../utils/databaseUriToConnection';
 
 const subscribersPath = path.join(__dirname, '..', 'subscribers', '**', '*Subscriber{ts,js}');
@@ -21,7 +15,7 @@ export const connectionOptions = databaseUriToConnection(dbConfig.databaseUrlStr
         type: 'database',
         tableName: 'tbl_caches',
     },
-    entities: [BrandEntity, ColorEntity, ContributionEntity, ImageEntity, ModelEntity, SneakerEntity, UserEntity],
+    entities: Object.values(AllEntities),
     subscribers: [subscribersPath],
     migrations: [migrationsPath],
     migrationsTableName: 'tbl_migrations',

@@ -1,4 +1,5 @@
-import { BrandEntity, connectIfNeeded } from '@repo/typeorm-database/core';
+import { connectIfNeeded } from '@repo/typeorm-database/conn';
+import { BrandEntity } from '@repo/typeorm-database/entities';
 
 import BrandsList from '@webApp/modules/brands/BrandsList';
 
