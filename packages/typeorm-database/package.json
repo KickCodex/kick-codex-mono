@@ -3,21 +3,29 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./shared": "./src/index.ts"
+    "./core": "./src/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "start": "ts-node ./src/index.ts",
+    "typeorm": "typeorm-ts-node-commonjs"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@swc/core": "^1.4.8",
     "@types/eslint": "^8.56.5",
+    "@types/lodash": "^4.17.0",
     "@types/node": "^20.11.24",
     "eslint": "^8.57.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "class-transformer": "^0.5.1",
+    "decimal.js": "^10.4.3",
+    "dotenv": "^16.4.5",
+    "lodash": "^4.17.21",
     "mysql2": "^3.9.2",
     "reflect-metadata": "^0.2.1",
     "ts-node": "^10.9.2",
