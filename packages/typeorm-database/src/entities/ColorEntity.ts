@@ -1,12 +1,16 @@
-import { Entity, Column } from 'typeorm';
+import { Column, Entity, ManyToMany, type Relation } from 'typeorm';
 
-import { EntityBase } from './EntityBase';
+import { SneakerEntity } from './SneakerEntity';
+import { EntityBase } from '../core/EntityBase';
 
-@Entity('colors')
+@Entity()
 export class ColorEntity extends EntityBase {
     @Column({ unique: true })
     declare name: string;
 
-    @Column({ name: 'hex_code' })
+    @Column()
     declare hexCode: string;
+
+    @ManyToMany(() => SneakerEntity, sneaker => sneaker.colors)
+    declare sneakers: Relation<SneakerEntity>[];
 }

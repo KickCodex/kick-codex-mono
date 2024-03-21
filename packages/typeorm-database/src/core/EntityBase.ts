@@ -4,12 +4,12 @@ export abstract class EntityBase extends BaseEntity {
     @PrimaryGeneratedColumn({ unsigned: true })
     declare id: number;
 
-    @CreateDateColumn({ name: 'created_at' })
+    @CreateDateColumn()
     declare createdAt: Date;
 
-    @UpdateDateColumn({ name: 'updated_at' })
+    @UpdateDateColumn()
     declare updatedAt: Date;
 
-    @DeleteDateColumn({ name: 'deleted_at' })
+    @DeleteDateColumn()
     declare deletedAt: Date | null;
 }

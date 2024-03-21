@@ -1,16 +1,18 @@
-import { Entity, Column } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
 
-import { EntityBase } from './EntityBase';
+import { ForeignIntColumn } from '../columns/ForeignIntColumn';
+import { EntityBase } from '../core/EntityBase';
 
-@Entity('images')
+@Entity()
 export class ImageEntity extends EntityBase {
-    @Column({ name: 'user_id' })
+    @ForeignIntColumn()
     declare userId: number;
 
-    @Column({ name: 'foreign_table' })
+    @Column()
+    @Index()
     declare foreignModel: string;
 
-    @Column({ name: 'foreign_id' })
+    @ForeignIntColumn()
     declare foreignId: number;
 
     @Column()

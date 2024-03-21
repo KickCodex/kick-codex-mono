@@ -1,6 +1,7 @@
 import * as path from 'path';
 
 import { dbConfig } from './dbConfig';
+import { CustomNamingStrategy } from '../core/CustomNamingStrategy';
 import { BrandEntity } from '../entities/BrandEntity';
 import { ColorEntity } from '../entities/ColorEntity';
 import { ContributionEntity } from '../entities/ContributionEntity';
@@ -13,6 +14,7 @@ import { databaseUriToConnection } from '../utils/databaseUriToConnection';
 const subscribersPath = path.join(__dirname, '..', 'subscribers', '**', '*Subscriber{ts,js}');
 const migrationsPath = path.join(__dirname, '..', 'migrations', '*');
 export const connectionOptions = databaseUriToConnection(dbConfig.databaseUrlString, {
+    namingStrategy: new CustomNamingStrategy(),
     synchronize: dbConfig.sync,
     logging: dbConfig.log,
     cache: {

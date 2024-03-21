@@ -1,8 +1,9 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany, Relation } from 'typeorm';
 
-import { EntityBase } from './EntityBase'; // Adjust the path as needed
+import { ContributionEntity } from './ContributionEntity';
+import { EntityBase } from '../core/EntityBase';
 
-@Entity('users')
+@Entity()
 export class UserEntity extends EntityBase {
     @Column({ unique: true })
     declare email: string;
@@ -10,15 +11,18 @@ export class UserEntity extends EntityBase {
     @Column({ nullable: true, type: 'varchar' })
     declare name: string | null;
 
-    @Column({ default: false, name: 'is_banned' })
+    @Column({ default: false })
     declare isBanned: boolean;
 
     @Column({ nullable: true, type: 'text' })
     declare image: string | null;
 
-    @Column({ nullable: true, name: 'provider_name', type: 'varchar' })
+    @Column({ nullable: true, type: 'varchar' })
     declare providerName: string | null;
 
-    @Column({ nullable: true, name: 'provider_uid', type: 'varchar' })
+    @Column({ nullable: true, type: 'varchar' })
     declare providerUid: string | null;
+
+    @OneToMany(() => ContributionEntity, contribution => contribution.user)
+    declare contributions: Relation<ContributionEntity>[];
 }

@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
-    "start": "ts-node ./src/index.ts",
+    "start": "ts-node --watch ./src/start.ts",
     "typeorm": "typeorm-ts-node-commonjs"
   },
   "devDependencies": {
@@ -25,6 +25,7 @@
     "class-transformer": "^0.5.1",
     "decimal.js": "^10.4.3",
     "dotenv": "^16.4.5",
+    "inflection": "^3.0.0",
     "lodash": "^4.17.21",
     "mysql2": "^3.9.2",
     "reflect-metadata": "^0.2.1",
