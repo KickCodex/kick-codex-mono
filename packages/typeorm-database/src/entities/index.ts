@@ -5,3 +5,4 @@ export { ImageEntity } from './ImageEntity';
 export { ModelEntity } from './ModelEntity';
 export { SneakerEntity } from './SneakerEntity';
 export { UserEntity } from './UserEntity';
+export { SocialProfileEntity } from './SocialProfileEntity';
