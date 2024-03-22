@@ -3,7 +3,7 @@ import { Column, Entity, Index } from 'typeorm';
 import { ForeignIntColumn } from '../columns/ForeignIntColumn';
 import { EntityBase } from '../core/EntityBase';
 
-@Entity()
+@Entity('images')
 export class ImageEntity extends EntityBase {
     @ForeignIntColumn()
     declare userId: number;

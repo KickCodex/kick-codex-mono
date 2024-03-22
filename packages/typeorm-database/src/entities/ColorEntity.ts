@@ -3,7 +3,7 @@ import { Column, Entity, ManyToMany, type Relation } from 'typeorm';
 import { SneakerEntity } from './SneakerEntity';
 import { EntityBase } from '../core/EntityBase';
 
-@Entity()
+@Entity('colors')
 export class ColorEntity extends EntityBase {
     @Column({ unique: true })
     declare name: string;

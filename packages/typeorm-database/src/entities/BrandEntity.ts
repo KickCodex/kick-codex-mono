@@ -4,7 +4,7 @@ import { ModelEntity } from './ModelEntity';
 import { SneakerEntity } from './SneakerEntity';
 import { EntityBase } from '../core/EntityBase';
 
-@Entity()
+@Entity('brands')
 export class BrandEntity extends EntityBase {
     @Column({ unique: true })
     declare name: string;

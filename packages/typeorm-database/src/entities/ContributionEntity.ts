@@ -6,7 +6,7 @@ import { EntityBase } from '../core/EntityBase';
 import { UserContributionType } from '../enums/UserContributionType';
 import { calculateDiff } from '../utils/calculateDiff';
 
-@Entity()
+@Entity('contributions')
 export class ContributionEntity extends EntityBase {
     @ForeignIntColumn()
     declare userId: number;

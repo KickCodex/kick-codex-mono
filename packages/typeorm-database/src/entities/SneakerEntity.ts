@@ -7,7 +7,7 @@ import { ForeignIntColumn } from '../columns/ForeignIntColumn';
 import { MoneyColumn } from '../columns/MoneyColumn';
 import { EntityBase } from '../core/EntityBase';
 
-@Entity()
+@Entity('sneakers')
 export class SneakerEntity extends EntityBase {
     @Column({ unique: true })
     declare name: string;

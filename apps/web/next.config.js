@@ -3,7 +3,7 @@ module.exports = {
     transpilePackages: ['@repo/ui'],
     experimental: {
         serverComponentsExternalPackages: ['typeorm'],
-        serverMinification: false,
+        serverMinification: true,
     },
     typescript: {},
     webpack: (config, { isServer }) => {

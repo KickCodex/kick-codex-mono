@@ -3,7 +3,7 @@ import { Column, Entity, OneToMany, Relation } from 'typeorm';
 import { ContributionEntity } from './ContributionEntity';
 import { EntityBase } from '../core/EntityBase';
 
-@Entity()
+@Entity('users')
 export class UserEntity extends EntityBase {
     @Column({ unique: true })
     declare email: string;
