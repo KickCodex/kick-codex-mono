@@ -237,6 +237,9 @@ importers:
       typeorm:
         specifier: ^0.3.20
         version: 0.3.20(mysql2@3.9.2)(ts-node@10.9.2)
+      yup:
+        specifier: ^1.4.0
+        version: 1.4.0
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*

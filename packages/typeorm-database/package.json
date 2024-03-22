@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./entities": "./src/entities/index.ts",
-    "./conn": "./src/data-source.ts"
+    "./conn": "./src/data-source.ts",
+    "./validation": "./src/validation/index.ts",
+    "./entities": "./src/entities/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -31,6 +32,7 @@
     "mysql2": "^3.9.2",
     "reflect-metadata": "^0.2.1",
     "ts-node": "^10.9.2",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "yup": "^1.4.0"
   }
 }
