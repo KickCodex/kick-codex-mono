@@ -1,20 +1,20 @@
 'use client';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PrismaDb } from '@repo/prisma-database/shared';
+import { BrandEntity } from '@repo/typeorm-database/entities';
+import { BrandFormType, BrandValidationSchema } from '@repo/typeorm-database/validation';
 import { TextAreaInput, TextInput } from '@repo/ui/form';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import { FieldPath, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { ValidationError } from 'yup';
 
 import ButtonLink from '@webApp/components/ButtonLink';
-import { BrandFormData, brandSchema } from '@webApp/modules/brands/brandSchema';
 
 type BrandFormProps = {
     forEdit?: boolean;
-    defaults?: PrismaDb.Brand;
+    defaults?: BrandEntity;
 };
 export const BrandForm: FC<BrandFormProps> = ({ forEdit = false, defaults }) => {
     let buttonLabel = 'Create Brand';
@@ -30,13 +30,15 @@ export const BrandForm: FC<BrandFormProps> = ({ forEdit = false, defaults }) => 
         successMessage = 'Brand edit successful';
     }
     const router = useRouter();
-    const { control, handleSubmit, setError } = useForm<BrandFormData>({
+    const { control, handleSubmit, setError, formState } = useForm<BrandFormType>({
         mode: 'onBlur',
-        resolver: yupResolver(brandSchema),
-        defaultValues: defaults as BrandFormData,
+        resolver: yupResolver(BrandValidationSchema),
+        defaultValues: defaults as BrandFormType,
     });
 
-    const onSubmit = handleSubmit(async formData => {
+    const onSubmit = handleSubmit(async (formData: BrandFormType, qw) => {
+        await new Promise(f => setTimeout(f, 3000));
+
         const response = await fetch(submitUrl, {
             method: submitMethod,
             headers: {
@@ -45,7 +47,7 @@ export const BrandForm: FC<BrandFormProps> = ({ forEdit = false, defaults }) => 
             body: JSON.stringify(formData),
         });
         const { data, error, validationError } = (await response.json()) as {
-            data?: PrismaDb.Brand;
+            data?: BrandEntity;
             error?: Error;
             validationError?: ValidationError;
         };
@@ -53,7 +55,7 @@ export const BrandForm: FC<BrandFormProps> = ({ forEdit = false, defaults }) => 
             validationError.inner.forEach(verror => {
                 const { path, message } = verror;
                 if (path) {
-                    setError(path as FieldPath<BrandFormData>, { message });
+                    setError(path as FieldPath<BrandFormType>, { message });
                 }
             });
             toast.error(validationError.message);
@@ -64,7 +66,6 @@ export const BrandForm: FC<BrandFormProps> = ({ forEdit = false, defaults }) => 
             router.push(`/brands/${data.id}`);
         }
     });
-
     return (
         <form onSubmit={onSubmit}>
             <TextInput control={control} name="name" label="Brand" placeholder="name of the brand" />
@@ -76,8 +77,8 @@ export const BrandForm: FC<BrandFormProps> = ({ forEdit = false, defaults }) => 
                 placeholder="description of the brand"
             />
             <ButtonLink variant="secondary" text="Cancel" href={cancelHref} className="me-2" />
-            <Button type="submit" variant="success">
-                {buttonLabel}
+            <Button type="submit" variant="success" disabled={formState.isSubmitting}>
+                {buttonLabel} {formState.isSubmitting && <Spinner size="sm" />}
             </Button>
         </form>
     );

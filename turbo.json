@@ -30,7 +30,9 @@
         "URL",
         "GOOGLE_CLIENT_ID",
         "GOOGLE_CLIENT_SECRET",
-        "DATABASE_URL"
+        "DATABASE_URL",
+        "DATABASE_SYNC",
+        "DATABASE_LOG"
       ]
     },
     "dev": {

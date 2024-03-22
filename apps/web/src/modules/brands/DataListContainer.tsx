@@ -1,9 +1,13 @@
+import { connectIfNeeded } from '@repo/typeorm-database/conn';
+import { BrandEntity } from '@repo/typeorm-database/entities';
+
 import BrandsList from '@webApp/modules/brands/BrandsList';
-import { fetchPaginatedBrands } from '@webApp/modules/brands/brandsQuery';
+import { toJson } from '@webApp/utils/toJson';
 
 export async function DataListContainer() {
-    const data = await fetchPaginatedBrands();
-    return <BrandsList brands={data.items} />;
+    await connectIfNeeded();
+    const brands = await BrandEntity.find();
+    return <BrandsList brands={toJson(brands)} />;
 }
 
 export default DataListContainer;

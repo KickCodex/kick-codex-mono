@@ -1,5 +1,5 @@
 'use client';
-import { PrismaDb } from '@repo/prisma-database/shared';
+import { BrandEntity } from '@repo/typeorm-database/entities';
 import Link from 'next/link';
 import { FC } from 'react';
 import Card from 'react-bootstrap/Card';
@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Pending from '@webApp/components/Pending';
 
 type BrandCardProps = {
-    brand?: PrismaDb.Brand;
+    brand?: BrandEntity;
 };
 
 const BrandCard: FC<BrandCardProps> = ({ brand }) => {

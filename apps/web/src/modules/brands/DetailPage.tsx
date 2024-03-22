@@ -1,12 +1,14 @@
+import { connectIfNeeded } from '@repo/typeorm-database/conn';
+import { BrandEntity } from '@repo/typeorm-database/entities';
 import { Debug } from '@repo/ui/debug';
 import { notFound } from 'next/navigation';
 
 import ButtonLink from '@webApp/components/ButtonLink';
 import PageContainer from '@webApp/components/layout/PageContainer';
-import { fetchBrand } from '@webApp/modules/brands/brandsQuery';
 
 export default async function DetailPage({ params }: { params: { id: string } }) {
-    const brand = await fetchBrand(Number(params.id));
+    await connectIfNeeded();
+    const brand = await BrandEntity.findOneBy({ id: Number(params.id) });
     if (!brand) notFound();
     return (
         <PageContainer title={brand.name}>
