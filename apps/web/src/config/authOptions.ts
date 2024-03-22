@@ -1,4 +1,6 @@
-import { prisma } from '@repo/prisma-database/shared';
+import { connectIfNeeded } from '@repo/typeorm-database/conn';
+import { UserEntity } from '@repo/typeorm-database/entities';
+import { NextUser, UserLogInService } from '@repo/typeorm-database/services';
 import { AuthOptions } from 'next-auth';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GoogleProvider from 'next-auth/providers/google';
@@ -9,25 +11,21 @@ export const authOptions: AuthOptions = {
     secret: appConfig.auth.secret,
     pages: {},
     callbacks: {
-        async signIn({ user, account, email, credentials, profile }) {
+        async signIn({ user, account, email, profile }) {
             if (!user.email || !account) {
                 return false;
             }
-            const payload = {
-                name: user.name || '',
-                email: user.email!,
-                image: user.image,
-            };
-            return await prisma.user.afterLogIn(payload, account);
+
+            await connectIfNeeded();
+            const userLoginService = new UserLogInService(user as NextUser, account);
+            const dbUser = await userLoginService.getDbUser();
+            return !dbUser.isBanned;
         },
         async jwt({ token, account, profile, session }) {
             if (!token.dbUid && token.email) {
-                const dbUser = await prisma.user.findFirst({
-                    where: { email: token.email },
-                });
-                if (dbUser?.id) {
-                    token.dbUid = dbUser.id;
-                }
+                await connectIfNeeded();
+                const dbUser = await UserEntity.findOneByOrFail({ email: token.email });
+                token.dbUid = dbUser.id;
             }
             return token;
         },

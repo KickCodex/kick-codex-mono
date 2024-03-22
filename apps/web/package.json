@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@repo/prisma-database": "workspace:*",
     "@repo/ui": "workspace:*",
     "@repo/typeorm-database": "workspace:*",
     "bootstrap": "^5.3.3",

@@ -1,15 +1,16 @@
-import { Column, Entity, OneToMany, Relation } from 'typeorm';
+import { Column, Entity, OneToMany, type Relation } from 'typeorm';
 
 import { ContributionEntity } from './ContributionEntity';
+import { SocialProfileEntity } from './SocialProfileEntity';
 import { EntityBase } from '../core/EntityBase';
 
 @Entity('users')
 export class UserEntity extends EntityBase {
-    @Column({ unique: true })
-    declare email: string;
-
     @Column({ nullable: true, type: 'varchar' })
     declare name: string | null;
+
+    @Column({ unique: true })
+    declare email: string;
 
     @Column({ default: false })
     declare isBanned: boolean;
@@ -17,12 +18,9 @@ export class UserEntity extends EntityBase {
     @Column({ nullable: true, type: 'text' })
     declare image: string | null;
 
-    @Column({ nullable: true, type: 'varchar' })
-    declare providerName: string | null;
-
-    @Column({ nullable: true, type: 'varchar' })
-    declare providerUid: string | null;
-
     @OneToMany(() => ContributionEntity, contribution => contribution.user)
     declare contributions: Relation<ContributionEntity>[];
+
+    @OneToMany(() => SocialProfileEntity, socialProfile => socialProfile.user)
+    declare socialProfiles: Relation<SocialProfileEntity>[];
 }

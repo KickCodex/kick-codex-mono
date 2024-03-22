@@ -5,12 +5,13 @@
   "exports": {
     "./conn": "./src/data-source.ts",
     "./validation": "./src/validation/index.ts",
-    "./entities": "./src/entities/index.ts"
+    "./entities": "./src/entities/index.ts",
+    "./services": "./src/services/index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
-    "start": "ts-node --watch ./src/start.ts",
+    "start": "npx nodemon --exec ts-node ./src/start.ts",
     "typeorm": "typeorm-ts-node-commonjs"
   },
   "devDependencies": {
