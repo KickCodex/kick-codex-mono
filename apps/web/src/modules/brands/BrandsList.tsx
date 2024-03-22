@@ -1,11 +1,11 @@
-import { PrismaDb } from '@repo/prisma-database/shared';
+import { BrandEntity } from '@repo/typeorm-database/entities';
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import BrandCard from '@webApp/modules/brands/BrandCard';
 
 type BrandsListProps = {
-    brands?: PrismaDb.Brand[];
+    brands?: BrandEntity[];
 };
 const BrandsList: FC<BrandsListProps> = ({ brands }) => {
     const collection = brands ? brands : Array(16).fill({ id: -1 });

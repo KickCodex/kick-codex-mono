@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinColumn, ManyToMany, ManyToOne, type Relation } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, type Relation } from 'typeorm';
 
 import { BrandEntity } from './BrandEntity';
 import { ColorEntity } from './ColorEntity';
